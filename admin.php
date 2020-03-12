@@ -51,29 +51,42 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 <div class="container">
                                                                                    
   <div class="table-responsive">          
-  <table class="table">
-    <thead>
-      <tr>
-      
-        <th>Country Name</th>
-        <th>Trip Name</th>
-        <th>Category</th>
-		  <th>Image</th>
-        <th>Description</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Anna</td>
-        <td>Pitt</td>
-        <td>35</td>
-        <td>New York</td>
-        <td>USA</td>
-      </tr>
-    </tbody>
-  </table>
+<!--		table to display product details-->
+		<table width="70%" border="2px">
+         <thead>
+            <tr>
+               <th>Product Images</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Buy</th>
+             </tr>
+        </thead>
+		<tbody>
+			<?php
+//			connecto to database
+           require ("mysqli_connect.php");
+//			get data from database
+			$q="select * from product";
+//			store query to result variable
+          	$r= @mysqli_query($dbc, $q) or die(mysqli_error($dbc));
+//			start loop to fetch rows
+			while($row = mysqli_fetch_array($r))
+			{
+       			echo "<form action='products.php?id=".$row['id']."&product_name=".$row['product_name']."&image=".$row['image']."&price=".$row['price']."&quantity=".$row['quantity']."' method='post' enctype='multipart/form-data'>";
+				echo "<tr>";
+//				get image, product name, price, quantity 
+				echo "<td>";?><img src="images/<?php echo $row["image"]; ?>" height="200" width="200"><?php echo "</td>";
+				echo "<td>"; echo $row["product_name"]; echo "</td>";
+				echo "<td>"; echo $row["price"]; echo "</td>";
+				echo "<td>"; echo $row["quantity"] ; echo "</td>";
+				echo "<td> <input type ='submit' value='Buy Now'>";echo "</td>";
+				echo "</tr>";
+				echo "</form>";
+    		}
+			?>
+			</tbody>
+		</table>
   </div>
 </div>
 	
@@ -83,24 +96,25 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
       
       <div class="form-group">
       <label>Trip</label>
-      <input type="text" class="form-control" id="tripname" placeholder="Enter trip" name="tripname">
+      <input type="text" class="form-control" id="tripname" placeholder="Enter trip" name="tripname" required>
     </div>
    
     <div class="form-group">
       <label >Category:</label>
-      <input type="text" class="form-control" id="category" placeholder="Enter category" name="category">
+        <input type="text" class="form-control" id="category" placeholder="Enter category" name="category" required>
     </div>
 	  
 	 
 	  
 	   <div class="form-group">
       <label >Description:</label>
-      <input type="text" class="form-control" id="description" placeholder="Enter Description" name="description">
+           <textarea rows="4" cols="50" type="textfield" class="form-control" id="description" placeholder="Enter Description" name="description" required></textarea>
     </div>
+      
 	  
 	    <div class="form-group">
       <label >Price:</label>
-      <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price">
+      <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price" required>
     </div>
 
       
