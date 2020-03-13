@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
    
 	$r= @mysqli_query($dbc, $q) or die(mysqli_error($dbc));
 	
+	
 	if(empty($tripname) || empty($category)|| empty($description)|| empty($price))
 	    {
 		echo "<h3>All fields are mandetory</h3>";
@@ -32,8 +33,11 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 		{
 				echo "failure";
 		}
-		} 
+		}
 	
+			
+	
+
        }
 	
        
@@ -48,51 +52,12 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 </head>
 <body>
 
-<div class="container">
-                                                                                   
-  <div class="table-responsive">          
-<!--		table to display product details-->
-		<table width="70%" border="2px">
-         <thead>
-            <tr>
-               <th>Product Images</th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Buy</th>
-             </tr>
-        </thead>
-		<tbody>
-			<?php
-//			connecto to database
-           require ("mysqli_connect.php");
-//			get data from database
-			$q="select * from product";
-//			store query to result variable
-          	$r= @mysqli_query($dbc, $q) or die(mysqli_error($dbc));
-//			start loop to fetch rows
-			while($row = mysqli_fetch_array($r))
-			{
-       			echo "<form action='products.php?id=".$row['id']."&product_name=".$row['product_name']."&image=".$row['image']."&price=".$row['price']."&quantity=".$row['quantity']."' method='post' enctype='multipart/form-data'>";
-				echo "<tr>";
-//				get image, product name, price, quantity 
-				echo "<td>";?><img src="images/<?php echo $row["image"]; ?>" height="200" width="200"><?php echo "</td>";
-				echo "<td>"; echo $row["product_name"]; echo "</td>";
-				echo "<td>"; echo $row["price"]; echo "</td>";
-				echo "<td>"; echo $row["quantity"] ; echo "</td>";
-				echo "<td> <input type ='submit' value='Buy Now'>";echo "</td>";
-				echo "</tr>";
-				echo "</form>";
-    		}
-			?>
-			</tbody>
-		</table>
-  </div>
-</div>
 	
         <div class="container">
   <h2>Add Trips</h2>
   <form action="admin.php" method="post">
+      
+      
       
       <div class="form-group">
       <label>Trip</label>
@@ -119,8 +84,34 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
       
 
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary">Add Trip</button>
   </form>
+              <table border="2">
+          <tr>
+              <th>Trip Name</th>
+               <th>Category</th>
+               <th>Description</th>
+               <th>Price</th>
+          </tr>
+          <?php
+                  $q= "SELECT * FROM mytrips ";
+   
+	$r= @mysqli_query($dbc, $q) or die(mysqli_error($dbc));
+	
+          while ($row=mysqli_fetch_array($r)){
+              $tripname=$row['tripname'];
+               $category=$row['category'];
+               $description=$row['description'];
+               $price=$row['price'];
+          echo '<tr>';
+          echo '<td>'.$tripname.'</td>';
+          echo '<td>'.$r['category'].'</td>'; 
+          echo '<td>'.$r['description'].'</td>';
+          echo '<td>'.$r['price'].'</td>';
+          echo '</tr>';
+          }
+          ?>
+      </table>
 </div>
 
 </body>
