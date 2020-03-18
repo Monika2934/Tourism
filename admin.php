@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 </head>
 <body>
 
-	
+
         <div class="container">
   <h2>Add Trips</h2>
   <form action="admin.php" method="post" enctype="multipart/form-data">
@@ -135,15 +135,16 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
           echo '<tr>';
           echo '<td>'.$tripname.'</td>';
 			       echo '<td>';
-			  			.$image.
-							echo '<img src="uploads/'.$image.'" height="200" width="200">';
+			  		
+				   echo '<img src="uploads/'.$image.'" height="200" width="200">';
 				   echo '</td>';
           echo '<td>'.$category.'</td>'; 
           echo '<td>'.$description.'</td>';
           echo '<td>'.$price.'</td>';
-        //  echo '<td>'; echo'<a href="admin.php?edit=$row ">' echo<'/td'>;
-			  echo '<td>';
-			 echo '<a href="process.php?delete='.$row['tripid'].'" class="btn btn-danger">Delete</a>';
+        echo '<td>'; 
+			 echo '<a href="update.php?tripid='.$row['tripid'].'" class="btn btn-primary">Update</a>';
+			echo '&nbsp';
+			 echo '<a href="delete.php?tripid='.$row['tripid'].'" class="btn btn-danger">Delete</a>';
 				  echo'</td>';
           echo '</tr>';
           }
