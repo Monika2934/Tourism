@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
       
       <div class="form-group">
       <label>Trip Name</label>
-      <input type="text" class="form-control" id="tripname" placeholder="Enter trip" name="tripname" >
+      <input type="text" class="form-control" id="tripname" placeholder="Enter trip" name="tripname" value="<?php echo $tripname; ?>">
     </div>
 	   <div class="form-group">
       
@@ -90,35 +90,39 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
    
     <div class="form-group">
       <label >Category:</label>
-        <input type="text" class="form-control" id="category" placeholder="Enter category" name="category" >
+        <input type="text" class="form-control" id="category" placeholder="Enter category" name="category" value="<?php echo $category; ?>">
     </div>
 	  
 	 
 	  
 	   <div class="form-group">
       <label >Description:</label>
-           <textarea rows="4" cols="50" type="textfield" class="form-control" id="description" placeholder="Enter Description" name="description" ></textarea>
+           <textarea rows="4" cols="50" type="textfield" class="form-control" id="description" placeholder="Enter Description" name="description" value="<?php echo $description; ?>"></textarea>
     </div>
       
 	  
 	    <div class="form-group">
       <label >Price:</label>
-      <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price" >
+      <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price" value="<?php echo $description; ?>" >
     </div>
 
       
 
     <button type="submit" class="btn btn-primary">Add Trip</button>
   </form>
-              <table border="2">
-          <tr>
-              <th>Trip Name</th>
-			  <th>Image</th>
-               <th>Category</th>
-               <th>Description</th>
-               <th>Price</th>
-			  <th>Action</th>
-          </tr>
+            <table class="table table-bordered">
+    <thead>
+      <tr class="bg-primary">
+        <th>Trip Name</th>
+        <th>Image</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    
+  
           <?php
                   $q= "SELECT * FROM mytrips ";
    
