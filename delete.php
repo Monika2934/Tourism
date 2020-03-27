@@ -9,11 +9,11 @@ $q= "DELETE FROM mytrips where  tripid ='$tripid'";
 
 
 if($r){
-	echo"Record Deleted from table";
+			echo ' <div class="alert alert-success container" style="width:500px;" role="alert">Record Deleted From table</div>';
 	header('location:admin.php');
 }
 else{
-	echo "Failed";
+	 echo ' <div class="alert alert-danger container" style="width:500px;" role="alert">Failure</div>';
 }
 
 ?>
